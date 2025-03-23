@@ -38,16 +38,15 @@ public class AutocompleteSteps {
     }
 
     @Then("I should see suggestions that contain the text {string}")
-    public void validateSuggestions(String termo) {
+   public void validateSuggestions(String value) {
         //Verificando se existem sugestões.
         Assert.assertFalse("No suggestions were found.", suggestions.isEmpty());
-        logger.info("No suggestions were found");
         //executando um for each para validar que as sugestões estão relacionadas com a busca
-        for (WebElement sugestao : suggestions) {
-            String text = sugestao.getText().toLowerCase();
+        for (WebElement suggestion : suggestions) {
+            String text = suggestion.getText().toLowerCase();
             //utilizar os textos junto ao assert true/false, ajuda a entender o que occoreu caso o teste falhe
-            Assert.assertTrue("Suggestion '"+ sugestao +"' does not contain the searched text: " + text,
-                    text.contains(termo.toLowerCase()));
+            Assert.assertTrue("Suggestion '"+ suggestion +"' does not contain the searched text: " + text,
+                    text.toLowerCase().contains(value.toLowerCase()));
         }
     }
 
